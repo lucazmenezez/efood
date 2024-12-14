@@ -1,3 +1,4 @@
+import Header from './components/Header'
 import { GlobalStyle } from './styles'
 
 function App() {
@@ -5,8 +6,9 @@ function App() {
     <>
       <GlobalStyle />
       <div>
-        <h1>Olá React</h1>
+        <Header page="home" />
       </div>
+      <div className="container"></div>
     </>
   )
 }
