@@ -3,6 +3,7 @@ import { cores } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
+  background-color: ${cores.branco};
   max-width: 472px;
   position: relative;
 
@@ -29,6 +30,10 @@ export const Div = styled.div`
   align-items: center;
   font-size: 18px;
   font-weight: bold;
+`
+
+export const Title = styled.h3`
+  font-size: 18px;
 `
 
 export const Reviews = styled.span`

@@ -1,4 +1,12 @@
-import { Card, Content, Description, Div, Image, Reviews } from './styles'
+import {
+  Card,
+  Content,
+  Description,
+  Div,
+  Image,
+  Reviews,
+  Title
+} from './styles'
 
 import iconStar from '../../assets/images/icon_star.svg'
 import Tag from '../Tag'
@@ -10,7 +18,7 @@ const Product = () => (
     <Tag>Etiqueta</Tag>
     <Content>
       <Div>
-        <h3>nome do prato</h3>
+        <Title>nome do prato</Title>
         <Reviews>
           4.9
           <img src={iconStar} alt="Ícone de estrela de avaliações" />

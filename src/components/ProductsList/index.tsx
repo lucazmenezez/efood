@@ -1,9 +1,13 @@
 import Product from '../Product'
 import { List, ListContainer } from './styles'
 
-const ProductsList = () => (
+export type Props = {
+  page: 'home' | 'perfil'
+}
+
+const ProductsList = ({ page }: Props) => (
   <ListContainer>
-    <List>
+    <List page={page}>
       <Product></Product>
       <Product></Product>
       <Product></Product>
