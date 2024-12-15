@@ -8,6 +8,8 @@ const ProductsList = () => (
       <Product></Product>
       <Product></Product>
       <Product></Product>
+      <Product></Product>
+      <Product></Product>
     </List>
   </ListContainer>
 )
