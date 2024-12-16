@@ -9,7 +9,7 @@ export const ListContainer = styled.div`
   padding-bottom: 120px;
 `
 
-export const List = styled.ul<Props>`
+export const List = styled.ul<Omit<Props, 'food'>>`
   display: grid;
   grid-template-columns: ${(props) =>
     props.page === 'home' ? '1fr 1fr' : '1fr 1fr 1fr'};

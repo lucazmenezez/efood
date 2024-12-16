@@ -1,20 +1,28 @@
+import Foods from '../../models/Foods'
 import Product from '../Product'
 import { List, ListContainer } from './styles'
 
 export type Props = {
   page: 'home' | 'perfil'
+  food: Foods[]
 }
 
-const ProductsList = ({ page }: Props) => (
+const ProductsList = ({ page, food }: Props) => (
   <ListContainer>
-    <List page={page}>
-      <Product></Product>
-      <Product></Product>
-      <Product></Product>
-      <Product></Product>
-      <Product></Product>
-      <Product></Product>
-    </List>
+    <div className="container">
+      <List page={page}>
+        {food.map((f) => (
+          <Product
+            key={f.id}
+            image={f.image}
+            tags={f.tags}
+            title={f.title}
+            reviews={f.reviews}
+            description={f.description}
+          ></Product>
+        ))}
+      </List>
+    </div>
   </ListContainer>
 )
 

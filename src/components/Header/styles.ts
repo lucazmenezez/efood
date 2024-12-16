@@ -11,6 +11,8 @@ export const HeaderContainer = styled.div`
 export const HeaderBar = styled.header<Props>`
   display: flex;
   flex-direction: ${(props) => (props.page === 'home' ? 'column' : 'row')};
+  justify-content: ${(props) =>
+    props.page === 'home' ? 'center' : 'space-between'};
   align-items: center;
 `
 
@@ -26,10 +28,12 @@ export const HeaderLink = styled(Link)`
   font-size: 18px;
   font-weight: 900;
   color: ${cores.rosa};
+  text-decoration: none;
 `
 
 export const HeaderCart = styled(Link)`
   font-size: 18px;
   font-weight: 900;
   color: ${cores.rosa};
+  text-decoration: none;
 `
