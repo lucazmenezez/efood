@@ -35,6 +35,7 @@ const Product = ({ image, tags = [], title, reviews, description }: Props) => (
         </Reviews>
       </Div>
       <Description>{description}</Description>
+      {/* fazer um TERNÁRIO OU IF */}
       <Button type="link" title="Ver nossos pratos" to="/perfil">
         Saiba Mais
       </Button>
