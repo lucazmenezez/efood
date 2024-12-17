@@ -31,9 +31,12 @@ export const HeaderLink = styled(Link)`
   text-decoration: none;
 `
 
-export const HeaderCart = styled(Link)`
+export const HeaderCart = styled.button`
   font-size: 18px;
   font-weight: 900;
   color: ${cores.rosa};
   text-decoration: none;
+  border: none;
+  background-color: ${cores.rosaClaro};
+  cursor: pointer;
 `

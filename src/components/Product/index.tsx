@@ -5,6 +5,7 @@ import {
   Div,
   Image,
   Reviews,
+  TagContainer,
   Title
 } from './styles'
 
@@ -18,14 +19,24 @@ export type Props = {
   title: string
   reviews?: number
   description: string
+  page: 'home' | 'perfil'
 }
 
-const Product = ({ image, tags = [], title, reviews, description }: Props) => (
+const Product = ({
+  image,
+  tags = [],
+  title,
+  reviews,
+  description,
+  page
+}: Props) => (
   <Card>
     <Image src={image} alt="teste" />
-    {tags.map((etiqueta) => (
-      <Tag key={etiqueta}>{etiqueta}</Tag>
-    ))}
+    <TagContainer>
+      {tags.map((etiqueta) => (
+        <Tag key={etiqueta}>{etiqueta}</Tag>
+      ))}
+    </TagContainer>
     <Content>
       <Div>
         <Title>{title}</Title>
@@ -35,10 +46,15 @@ const Product = ({ image, tags = [], title, reviews, description }: Props) => (
         </Reviews>
       </Div>
       <Description>{description}</Description>
-      {/* fazer um TERNÁRIO OU IF */}
-      <Button type="link" title="Ver nossos pratos" to="/perfil">
-        Saiba Mais
-      </Button>
+      {page === 'home' ? (
+        <Button type="link" title="Ver nossos pratos" to="/perfil">
+          Saiba Mais
+        </Button>
+      ) : (
+        <Button type="button" title="Ir para o carrinho">
+          Adicionar ao Carrinho
+        </Button>
+      )}
     </Content>
   </Card>
 )

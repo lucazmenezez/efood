@@ -11,42 +11,42 @@ const foods: Foods[] = [
     image: prato3,
     title: 'Pizza Marguerita',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   },
   {
     id: 8,
     image: prato3,
     title: 'La Dolce Vita Trattoria',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   },
   {
     id: 9,
     image: prato3,
     title: 'Pizza Marguerita',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   },
   {
     id: 10,
     image: prato3,
     title: 'La Dolce Vita Trattoria',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   },
   {
     id: 11,
     image: prato3,
     title: 'Pizza Marguerita',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   },
   {
     id: 12,
     image: prato3,
     title: 'Pizza Marguerita',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rem, expedita deleniti. Optio quisquam vero voluptatibus, mollitia et unde sunt illum, ducimus delectus cumque perspiciatis corporis quo minus consequatur suscipit incidunt!'
+      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
   }
 ]
 

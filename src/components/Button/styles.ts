@@ -11,6 +11,9 @@ export const StyleButton = styled.button`
   padding: 4px 0;
   text-decoration: none;
   display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
 `
 
 export const StyleLink = styled(Link)`

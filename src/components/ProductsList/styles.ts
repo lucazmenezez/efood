@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Props } from '.'
 import { Card, Reviews, Title } from '../Product/styles'
 import { cores } from '../../styles'
-import { TagContainer } from '../Tag/styles'
+import { TagStyle } from '../Tag/styles'
 
 export const ListContainer = styled.div`
   padding-top: 80px;
@@ -32,7 +32,7 @@ export const List = styled.ul<Omit<Props, 'food'>>`
     visibility: ${(props) => (props.page === 'home' ? 'visible' : 'hidden')};
   }
 
-  ${TagContainer} {
+  ${TagStyle} {
     visibility: ${(props) => (props.page === 'home' ? 'visible' : 'hidden')};
   }
 `

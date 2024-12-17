@@ -34,7 +34,7 @@ const Header = ({ page }: Props) => {
         <HeaderBar page={page}>
           <HeaderLink to="/">Restaurantes</HeaderLink>
           <img src={logo} alt="Efood" />
-          <HeaderCart to="/cart">0 produto(s) no carrinho</HeaderCart>
+          <HeaderCart>0 produto(s) no carrinho</HeaderCart>
         </HeaderBar>
       </div>
     </HeaderContainer>

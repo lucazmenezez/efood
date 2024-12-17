@@ -1,17 +1,16 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { TagContainer } from '../Tag/styles'
 
 export const Card = styled.div`
   background-color: ${cores.branco};
   max-width: 472px;
   position: relative;
+`
 
-  ${TagContainer} {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-  }
+export const TagContainer = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `
 
 export const Image = styled.img`

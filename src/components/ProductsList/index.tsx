@@ -19,6 +19,7 @@ const ProductsList = ({ page, food }: Props) => (
             title={f.title}
             reviews={f.reviews}
             description={f.description}
+            page={page}
           ></Product>
         ))}
       </List>
