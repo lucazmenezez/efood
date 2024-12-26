@@ -4,7 +4,6 @@ import ProductsList from '../../components/ProductsList'
 import prato3 from '../../assets/images/image3.png'
 import Foods from '../../models/Foods'
 import Banner from '../../components/Banner'
-import Modal from '../../components/Modal'
 
 const foods: Foods[] = [
   {
@@ -56,7 +55,6 @@ const Perfil = () => (
     <Header page="perfil" />
     <Banner />
     <ProductsList food={foods} page="perfil" />
-    <Modal />
   </>
 )
 
