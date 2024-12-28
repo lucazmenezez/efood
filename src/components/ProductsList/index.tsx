@@ -1,27 +1,40 @@
-import Foods from '../../models/Foods'
+import { Menu, Restaurants } from '../../pages/Home'
 import Product from '../Product'
 import { List, ListContainer } from './styles'
 
 export type Props = {
   page: 'home' | 'perfil'
-  food: Foods[]
+  food: Restaurants[] | Menu[]
 }
 
 const ProductsList = ({ page, food }: Props) => (
   <ListContainer>
     <div className="container">
       <List page={page}>
-        {food.map((f) => (
-          <Product
-            key={f.id}
-            image={f.image}
-            tags={f.tags}
-            title={f.title}
-            reviews={f.reviews}
-            description={f.description}
-            page={page}
-          ></Product>
-        ))}
+        {page === 'home'
+          ? (food as Restaurants[]).map((f) => (
+              <Product
+                id={f.id}
+                key={f.id}
+                image={f.capa}
+                tags={f.tipo}
+                title={f.titulo}
+                reviews={f.avaliacao}
+                description={f.descricao}
+                page={page}
+              />
+            ))
+          : (food as Menu[]).map((f) => (
+              <Product
+                id={f.id}
+                key={f.id}
+                image={f.foto}
+                tags={[]}
+                title={f.nome}
+                description={f.descricao}
+                page={page}
+              />
+            ))}
       </List>
     </div>
   </ListContainer>

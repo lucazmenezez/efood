@@ -1,61 +1,32 @@
 import Header from '../../components/Header'
 import ProductsList from '../../components/ProductsList'
 
-import prato3 from '../../assets/images/image3.png'
-import Foods from '../../models/Foods'
 import Banner from '../../components/Banner'
+import { useEffect, useState } from 'react'
+import { Menu } from '../Home'
+import { useParams } from 'react-router-dom'
 
-const foods: Foods[] = [
-  {
-    id: 7,
-    image: prato3,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 8,
-    image: prato3,
-    title: 'La Dolce Vita Trattoria',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 9,
-    image: prato3,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 10,
-    image: prato3,
-    title: 'La Dolce Vita Trattoria',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 11,
-    image: prato3,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
-  },
-  {
-    id: 12,
-    image: prato3,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!'
+const Perfil = () => {
+  const { id } = useParams()
+  const [cardapio, setCardapio] = useState<Menu[]>([])
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setCardapio(res.cardapio))
+  }, [id])
+
+  if (!cardapio.length) {
+    return <p>Carregando...</p>
   }
-]
 
-const Perfil = () => (
-  <>
-    <Header page="perfil" />
-    <Banner />
-    <ProductsList food={foods} page="perfil" />
-  </>
-)
+  return (
+    <>
+      <Header page="perfil" />
+      <Banner />
+      <ProductsList food={cardapio} page="perfil" />
+    </>
+  )
+}
 
 export default Perfil

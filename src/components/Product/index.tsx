@@ -22,6 +22,7 @@ export type Props = {
   reviews?: number
   description: string
   page: 'home' | 'perfil'
+  id: number
 }
 
 const Product = ({
@@ -30,7 +31,8 @@ const Product = ({
   title,
   reviews,
   description,
-  page
+  page,
+  id
 }: Props) => {
   const [modalAberto, setModalAberto] = useState(false)
 
@@ -42,7 +44,7 @@ const Product = ({
       <Card>
         <Image src={image} alt="teste" />
         <TagContainer>
-          {tags.map((etiqueta) => (
+          {(Array.isArray(tags) ? tags : []).map((etiqueta) => (
             <Tag key={etiqueta}>{etiqueta}</Tag>
           ))}
         </TagContainer>
@@ -56,7 +58,7 @@ const Product = ({
           </Div>
           <Description>{description}</Description>
           {page === 'home' ? (
-            <Button type="link" title="Ver nossos pratos" to="/perfil">
+            <Button type="link" title="Ver nossos pratos" to={`/perfil/${id}`}>
               Saiba Mais
             </Button>
           ) : (
