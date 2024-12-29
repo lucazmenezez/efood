@@ -44,8 +44,8 @@ const Product = ({
   const fecharModal = () => setModalAberto(false)
 
   const getDescription = (descricao: string) => {
-    if (descricao.length > 131) {
-      return descricao.slice(0, 128) + '...'
+    if (descricao.length > 124) {
+      return descricao.slice(0, 121) + '...'
     }
 
     return descricao
