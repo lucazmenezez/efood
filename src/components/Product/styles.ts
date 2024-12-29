@@ -16,6 +16,7 @@ export const TagContainer = styled.div`
 export const Image = styled.img`
   display: block;
   width: 100%;
+  object-fit: cover;
 `
 
 export const Content = styled.div`

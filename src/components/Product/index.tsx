@@ -39,13 +39,21 @@ const Product = ({
   const abrirModal = () => setModalAberto(true)
   const fecharModal = () => setModalAberto(false)
 
+  const getDescription = (descricao: string) => {
+    if (descricao.length > 131) {
+      return descricao.slice(0, 128) + '...'
+    }
+
+    return descricao
+  }
+
   return (
     <>
       <Card>
-        <Image src={image} alt="teste" />
+        <Image src={image} alt="Imagem dos Restaurantes" />
         <TagContainer>
-          {(Array.isArray(tags) ? tags : []).map((etiqueta) => (
-            <Tag key={etiqueta}>{etiqueta}</Tag>
+          {tags.map((etiqueta, index) => (
+            <Tag key={`${etiqueta}-${index}`}>{etiqueta}</Tag>
           ))}
         </TagContainer>
         <Content>
@@ -56,7 +64,9 @@ const Product = ({
               <img src={iconStar} alt="Ícone de estrela de avaliações" />
             </Reviews>
           </Div>
-          <Description>{description}</Description>
+          <Description>
+            {page === 'perfil' ? getDescription(description) : description}
+          </Description>
           {page === 'home' ? (
             <Button type="link" title="Ver nossos pratos" to={`/perfil/${id}`}>
               Saiba Mais

@@ -12,18 +12,22 @@ const ProductsList = ({ page, food }: Props) => (
     <div className="container">
       <List page={page}>
         {page === 'home'
-          ? (food as Restaurants[]).map((f) => (
-              <Product
-                id={f.id}
-                key={f.id}
-                image={f.capa}
-                tags={f.tipo}
-                title={f.titulo}
-                reviews={f.avaliacao}
-                description={f.descricao}
-                page={page}
-              />
-            ))
+          ? (food as Restaurants[]).map((f) => {
+              const tags = f.destacado ? [f.tipo, 'Destaque'] : [f.tipo]
+
+              return (
+                <Product
+                  id={f.id}
+                  key={f.id}
+                  image={f.capa}
+                  tags={tags as string[]}
+                  title={f.titulo}
+                  reviews={f.avaliacao}
+                  description={f.descricao}
+                  page={page}
+                />
+              )
+            })
           : (food as Menu[]).map((f) => (
               <Product
                 id={f.id}

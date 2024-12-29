@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Props } from '.'
-import { Card, Reviews, Title } from '../Product/styles'
+import { Card, Image, Reviews, Title } from '../Product/styles'
 import { cores } from '../../styles'
 import { TagStyle } from '../Tag/styles'
 
@@ -34,5 +34,9 @@ export const List = styled.ul<Omit<Props, 'food'>>`
 
   ${TagStyle} {
     visibility: ${(props) => (props.page === 'home' ? 'visible' : 'hidden')};
+  }
+
+  ${Image} {
+    max-height: ${(props) => (props.page === 'home' ? '220px' : '170px')};
   }
 `
