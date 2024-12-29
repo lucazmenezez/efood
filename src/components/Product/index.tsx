@@ -23,6 +23,8 @@ export type Props = {
   description: string
   page: 'home' | 'perfil'
   id: number
+  preco: number
+  porcao: string
 }
 
 const Product = ({
@@ -32,7 +34,9 @@ const Product = ({
   reviews,
   description,
   page,
-  id
+  id,
+  preco,
+  porcao
 }: Props) => {
   const [modalAberto, setModalAberto] = useState(false)
 
@@ -82,7 +86,16 @@ const Product = ({
           )}
         </Content>
       </Card>
-      {modalAberto && <Modal fecharModal={fecharModal} />}
+      {modalAberto && (
+        <Modal
+          fecharModal={fecharModal}
+          nome={title}
+          descricao={description}
+          porcao={porcao}
+          preco={preco}
+          imagem={image}
+        />
+      )}
     </>
   )
 }

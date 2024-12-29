@@ -25,18 +25,22 @@ const ProductsList = ({ page, food }: Props) => (
                   reviews={f.avaliacao}
                   description={f.descricao}
                   page={page}
+                  preco={0}
+                  porcao={''}
                 />
               )
             })
-          : (food as Menu[]).map((f) => (
+          : (food as Menu[]).map((f, index) => (
               <Product
-                id={f.id}
-                key={f.id}
+                id={f.id || index}
+                key={f.id || index}
                 image={f.foto}
                 tags={[]}
                 title={f.nome}
                 description={f.descricao}
                 page={page}
+                porcao={f.porcao}
+                preco={f.preco}
               />
             ))}
       </List>

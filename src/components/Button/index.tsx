@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { StyleButton, StyleLink } from './styles'
 
 type Props = {
@@ -5,7 +6,7 @@ type Props = {
   title: string
   to?: string
   onClick?: () => void
-  children: string
+  children: ReactNode
 }
 
 const Button = ({ type, title, children, to, onClick }: Props) => {

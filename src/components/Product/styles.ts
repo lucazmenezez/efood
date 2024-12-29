@@ -50,6 +50,5 @@ export const Description = styled.p`
   margin: 16px 0;
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 1px;
   line-height: 22px;
 `
