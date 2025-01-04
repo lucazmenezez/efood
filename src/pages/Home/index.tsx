@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useGetRestaurantsQuery } from '../../services/api'
 
 import Header from '../../components/Header'
 import ProductsList from '../../components/ProductsList'
@@ -24,20 +24,17 @@ export type Menu = {
 }
 
 const Home = () => {
-  const [home, setHome] = useState<Restaurants[]>([])
+  const { data: restaurants } = useGetRestaurantsQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setHome(res))
-  }, [])
-
-  return (
-    <>
-      <Header page="home" />
-      <ProductsList food={home} page="home" />
-    </>
-  )
+  if (restaurants) {
+    return (
+      <>
+        <Header page="home" />
+        <ProductsList food={restaurants} page="home" />
+      </>
+    )
+  }
+  return <h4>Carregando...</h4>
 }
 
 export default Home
