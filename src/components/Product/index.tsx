@@ -81,7 +81,7 @@ const Product = ({
               title="Ir para o carrinho"
               onClick={abrirModal}
             >
-              Adicionar ao Carrinho
+              Mais Detalhes
             </Button>
           )}
         </Content>
