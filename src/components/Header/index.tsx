@@ -9,11 +9,22 @@ import {
 import hero from '../../assets/images/banner_hero.png'
 import logo from '../../assets/images/logo.png'
 
+import { open } from '../../store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+
 export type Props = {
   page: 'home' | 'perfil'
 }
 
 const Header = ({ page }: Props) => {
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
+
+  const openCart = () => {
+    dispatch(open())
+  }
+
   if (page === 'home') {
     return (
       <HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
@@ -34,7 +45,9 @@ const Header = ({ page }: Props) => {
         <HeaderBar page={page}>
           <HeaderLink to="/">Restaurantes</HeaderLink>
           <img src={logo} alt="Efood" />
-          <HeaderCart>0 produto(s) no carrinho</HeaderCart>
+          <HeaderCart onClick={openCart}>
+            {items.length} produto(s) no carrinho
+          </HeaderCart>
         </HeaderBar>
       </div>
     </HeaderContainer>

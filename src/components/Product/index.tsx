@@ -14,6 +14,7 @@ import iconStar from '../../assets/images/icon_star.svg'
 import Tag from '../Tag'
 import Button from '../Button'
 import Modal from '../Modal'
+import { Menu } from '../../pages/Home'
 
 export type Props = {
   image: string
@@ -49,6 +50,15 @@ const Product = ({
     }
 
     return descricao
+  }
+
+  const food: Menu = {
+    foto: image,
+    preco: preco,
+    id: id,
+    nome: title,
+    descricao: description,
+    porcao: porcao
   }
 
   return (
@@ -94,6 +104,7 @@ const Product = ({
           porcao={porcao}
           preco={preco}
           imagem={image}
+          food={food}
         />
       )}
     </>

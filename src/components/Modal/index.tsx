@@ -3,6 +3,10 @@ import { Description, Title } from '../Product/styles'
 import { Content, IconClose, ModalContainer, Text } from './styles'
 import close from '../../assets/images/close.svg'
 
+import { add, open } from '../../store/reducers/cart'
+import { useDispatch } from 'react-redux'
+import { Menu } from '../../pages/Home'
+
 type ModalProps = {
   fecharModal: () => void
   nome: string
@@ -10,6 +14,14 @@ type ModalProps = {
   porcao: string
   preco: number
   imagem: string
+  food: Menu
+}
+
+export const formataPreco = (preco: number) => {
+  return new Intl.NumberFormat('pt-br', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
 }
 
 const Modal = ({
@@ -18,8 +30,16 @@ const Modal = ({
   imagem,
   nome,
   porcao,
-  preco
+  preco,
+  food
 }: ModalProps) => {
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(food))
+    dispatch(open())
+  }
+
   return (
     <ModalContainer className="visible">
       <Content className="container">
@@ -33,8 +53,8 @@ const Modal = ({
             <br />
             <span>Serve: {porcao}</span>
           </Description>
-          <Button type="button" title="Ir para o carrinho">
-            Adicionar ao Carrinho - R$ {preco.toFixed(2)}
+          <Button type="button" title="Ir para o carrinho" onClick={addToCart}>
+            Adicionar ao Carrinho - {formataPreco(preco)}
           </Button>
         </Text>
       </Content>
