@@ -17,17 +17,21 @@ const Footer = () => (
         <img src={logo} alt="Logo Efood" />
         <List>
           <ListItem>
-            <a href="#">
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noreferrer"
+            >
               <img src={iconInstagram} alt="Ícone do Instagram" />
             </a>
           </ListItem>
           <ListItem>
-            <a href="#">
+            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
               <img src={iconFacebook} alt="Ícone do Facebook" />
             </a>
           </ListItem>
           <ListItem>
-            <a href="#">
+            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
               <img src={iconTwitter} alt="Ícone do Twitter" />
             </a>
           </ListItem>

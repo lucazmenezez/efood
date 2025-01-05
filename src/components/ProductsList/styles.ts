@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Props } from '.'
 import { Card, Image, Reviews, Title } from '../Product/styles'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { TagStyle } from '../Tag/styles'
 
 export const ListContainer = styled.div`
@@ -38,5 +38,13 @@ export const List = styled.ul<Omit<Props, 'food'>>`
 
   ${Image} {
     max-height: ${(props) => (props.page === 'home' ? '220px' : '170px')};
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: 1fr;
   }
 `

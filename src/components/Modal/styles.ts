@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
 export const ModalContainer = styled.div`
@@ -43,6 +43,19 @@ export const Content = styled.div`
     height: 280px;
     object-fit: cover;
     border-radius: 8px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      height: 100px;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+    height: 95vh;
+
+    h3 {
+      margin-top: 16px;
+    }
   }
 `
 
@@ -58,5 +71,9 @@ export const Text = styled.div`
 
   ${StyleButton} {
     max-width: 300px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-left: 0;
   }
 `
