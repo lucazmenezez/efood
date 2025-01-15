@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
+type InputGroupProps = {
+  maxWidth?: string
+}
+
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,8 +27,9 @@ export const Column = styled.div`
   }
 `
 
-export const InputGroup = styled.div`
+export const InputGroup = styled.div<InputGroupProps>`
   flex: auto;
+  max-width: ${(props) => props.maxWidth || 'auto'};
 
   label {
     font-size: 14px;
