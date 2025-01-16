@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Bannerstyle = styled.div`
   width: 100%;
@@ -18,6 +18,10 @@ export const Bannerstyle = styled.div`
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: 300px;
   }
 `
 

@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import Button from '../Button'
 import Card from '../Card'
 
+import { usePurchaseMutation } from '../../services/api'
+
 import { Column, InputGroup } from './styles'
 
 type CheckoutProps = {
@@ -13,14 +15,16 @@ type CheckoutProps = {
 }
 
 const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+
   const form = useFormik({
     initialValues: {
-      fullName: '',
-      adress: '',
+      receiver: '',
+      description: '',
       city: '',
-      cep: '',
+      zipCode: '',
       numberAdress: '',
-      complemento: '',
+      complement: '',
       cardName: '',
       cardNumber: '',
       cardCode: '',
@@ -28,19 +32,35 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
       expiresYear: ''
     },
     validationSchema: Yup.object({
-      fullName: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
-        .required('O campo é obrigatório'),
-      adress: Yup.string()
-        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
-        .required('O campo é obrigatório'),
-      city: Yup.string().required('O campo é obrigatório'),
-      cep: Yup.string()
-        .min(10, 'O campo precisa ter pelo menos 10 caracteres')
-        .max(10, 'O campo precisa ter 10 caracteres')
-        .required('O campo é obrigatório'),
-      numberAdress: Yup.string().required('O campo é obrigatório'),
-      complemento: Yup.string(),
+      receiver: Yup.string().when((values, schema) =>
+        step === 'delivery'
+          ? schema
+              .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      description: Yup.string().when((values, schema) =>
+        step === 'delivery'
+          ? schema
+              .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      city: Yup.string().when((values, schema) =>
+        step === 'delivery' ? schema.required('O campo é obrigatório') : schema
+      ),
+      zipCode: Yup.string().when((values, schema) =>
+        step === 'delivery'
+          ? schema
+              .min(9, 'O campo precisa ter pelo menos 10 caracteres')
+              .max(9, 'O campo precisa ter 10 caracteres')
+              .required('O campo é obrigatório')
+          : schema
+      ),
+      numberAdress: Yup.string().when((values, schema) =>
+        step === 'delivery' ? schema.required('O campo é obrigatório') : schema
+      ),
+      complement: Yup.string(),
 
       cardName: Yup.string().when((values, schema) =>
         step === 'payment' ? schema.required('O campo é obrigatório') : schema
@@ -59,7 +79,39 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
       )
     }),
     onSubmit: (values) => {
-      console.log(values)
+      const deliveryData = {
+        receiver: values.receiver,
+        adress: {
+          city: values.city,
+          complement: values.complement,
+          zipCode: values.zipCode,
+          number: Number(values.numberAdress),
+          description: values.description
+        }
+      }
+
+      const paymentData = {
+        card: {
+          name: values.cardName,
+          number: values.cardNumber,
+          code: Number(values.cardCode),
+          expires: {
+            month: Number(values.expiresMonth),
+            year: Number(values.expiresYear)
+          }
+        }
+      }
+
+      purchase({
+        delivery: deliveryData,
+        payment: paymentData,
+        products: [
+          {
+            id: 1,
+            price: 190
+          }
+        ]
+      })
     }
   })
 
@@ -71,6 +123,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
     return ''
   }
 
+  const handleFormSubmit = () => {
+    form.handleSubmit() // Dispara a submissão do formulário
+  }
+
   return (
     <form onSubmit={form.handleSubmit} className="container">
       {step === 'delivery' && (
@@ -78,30 +134,32 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
           <>
             <Column>
               <InputGroup>
-                <label htmlFor="fullName">Quem irá receber</label>
+                <label htmlFor="receiver">Quem irá receber</label>
                 <input
                   type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={form.values.fullName}
+                  id="receiver"
+                  name="receiver"
+                  value={form.values.receiver}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
                 <small>
-                  {getErrorMessage('fullName', form.errors.fullName)}
+                  {getErrorMessage('receiver', form.errors.receiver)}
                 </small>
               </InputGroup>
               <InputGroup>
-                <label htmlFor="adress">Endereço</label>
+                <label htmlFor="description">Endereço</label>
                 <input
                   type="text"
-                  id="adress"
-                  name="adress"
-                  value={form.values.adress}
+                  id="description"
+                  name="description"
+                  value={form.values.description}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <small>{getErrorMessage('adress', form.errors.adress)}</small>
+                <small>
+                  {getErrorMessage('description', form.errors.description)}
+                </small>
               </InputGroup>
               <InputGroup>
                 <label htmlFor="city">Cidade</label>
@@ -117,16 +175,18 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
               </InputGroup>
               <div className="inputGroupFlex">
                 <InputGroup>
-                  <label htmlFor="cep">CEP</label>
+                  <label htmlFor="zipCode">CEP</label>
                   <input
                     type="text"
-                    id="cep"
-                    name="cep"
-                    value={form.values.cep}
+                    id="zipCode"
+                    name="zipCode"
+                    value={form.values.zipCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
-                  <small>{getErrorMessage('cep', form.errors.cep)}</small>
+                  <small>
+                    {getErrorMessage('zipCode', form.errors.zipCode)}
+                  </small>
                 </InputGroup>
                 <InputGroup>
                   <label htmlFor="numberAdress">Número</label>
@@ -144,17 +204,17 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                 </InputGroup>
               </div>
               <InputGroup>
-                <label htmlFor="complemento">Complemento(opcional)</label>
+                <label htmlFor="complement">Complemento(opcional)</label>
                 <input
                   type="text"
-                  id="complemento"
-                  name="complemento"
-                  value={form.values.complemento}
+                  id="complement"
+                  name="complement"
+                  value={form.values.complement}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
                 <small>
-                  {getErrorMessage('complemento', form.errors.complemento)}
+                  {getErrorMessage('complement', form.errors.complement)}
                 </small>
               </InputGroup>
               <div className="margin-top">
@@ -258,8 +318,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
               <div className="margin-top">
                 <Button
                   title="Clique aqui para finalizar a compra"
-                  type="button"
-                  onClick={form.handleSubmit}
+                  type="submit"
+                  onClick={handleFormSubmit}
                 >
                   Finalizar o pagamento
                 </Button>

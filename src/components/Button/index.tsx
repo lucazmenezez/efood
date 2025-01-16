@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { StyleButton, StyleLink } from './styles'
 
 type Props = {
-  type: 'button' | 'link'
+  type: 'button' | 'link' | 'submit'
   title: string
   to?: string
   onClick?: () => void
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Button = ({ type, title, children, to, onClick }: Props) => {
-  if (type === 'button') {
+  if (type === 'button' || type === 'submit') {
     return (
       <StyleButton type="button" title={title} onClick={onClick}>
         {children}

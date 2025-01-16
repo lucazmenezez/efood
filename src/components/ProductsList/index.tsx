@@ -13,7 +13,9 @@ const ProductsList = ({ page, food }: Props) => (
       <List page={page}>
         {page === 'home'
           ? (food as Restaurants[]).map((f) => {
-              const tags = f.destacado ? [f.tipo, 'Destaque'] : [f.tipo]
+              const tags = f.destacado
+                ? [f.tipo, 'Destaque da Semana']
+                : [f.tipo]
 
               return (
                 <Product
