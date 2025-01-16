@@ -8,6 +8,7 @@ import {
 
 import hero from '../../assets/images/banner_hero.png'
 import logo from '../../assets/images/logo.png'
+import cart from '../../assets/images/cart.svg'
 
 import { open } from '../../store/reducers/cart'
 import { useDispatch, useSelector } from 'react-redux'
@@ -46,7 +47,8 @@ const Header = ({ page }: Props) => {
           <HeaderLink to="/">Restaurantes</HeaderLink>
           <img src={logo} alt="Efood" />
           <HeaderCart onClick={openCart}>
-            {items.length} produto(s) no carrinho
+            {items.length} <span>produto(s) no carrinho</span>
+            <img src={cart} alt="carrinho de compras" />
           </HeaderCart>
         </HeaderBar>
       </div>

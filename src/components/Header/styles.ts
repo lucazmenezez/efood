@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Props } from '.'
 import { Link } from 'react-router-dom'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const HeaderContainer = styled.div`
   padding: 40px 0;
@@ -14,6 +14,12 @@ export const HeaderBar = styled.header<Props>`
   justify-content: ${(props) =>
     props.page === 'home' ? 'center' : 'space-between'};
   align-items: center;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    span {
+      display: none;
+    }
+  }
 `
 
 export const Title = styled.h1`
@@ -39,4 +45,12 @@ export const HeaderCart = styled.button`
   border: none;
   background-color: ${cores.rosaClaro};
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  img {
+    filter: invert(38%) sepia(76%) saturate(447%) hue-rotate(314deg)
+      brightness(95%) contrast(88%); //cor do carrinho
+  }
 `
