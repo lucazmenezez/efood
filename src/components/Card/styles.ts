@@ -11,4 +11,8 @@ export const ContainerCard = styled.div`
     font-size: 16px;
     font-weight: bold;
   }
+
+  .margin-bottom {
+    margin-bottom: 24px;
+  }
 `

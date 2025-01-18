@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
 import lixeira from '../../assets/images/icon_lixeira.svg'
@@ -40,6 +40,12 @@ export const Sidebar = styled.aside`
   ${StyleButton} {
     max-width: 100%;
     width: 100%;
+  }
+
+  @media (max-width: ${breakpoints.desktop}) {
+    .container {
+      max-width: 100%;
+    }
   }
 `
 
