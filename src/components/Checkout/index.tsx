@@ -4,9 +4,10 @@ import * as Yup from 'yup'
 import Button from '../Button'
 import Card from '../Card'
 
-import { usePurchaseMutation } from '../../services/api'
+import { PurchasePayload, usePurchaseMutation } from '../../services/api'
 
 import { Column, InputGroup } from './styles'
+import { useState } from 'react'
 
 type CheckoutProps = {
   onContinue: () => void
@@ -16,6 +17,18 @@ type CheckoutProps = {
 
 const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
   const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [deliveryData, setDeliveryData] = useState<PurchasePayload['delivery']>(
+    {
+      receiver: '',
+      address: {
+        description: '',
+        city: '',
+        zipCode: '',
+        number: 0,
+        complement: ''
+      }
+    }
+  )
 
   const form = useFormik({
     initialValues: {
@@ -32,86 +45,84 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
       expiresYear: ''
     },
     validationSchema: Yup.object({
-      receiver: Yup.string().when((values, schema) =>
+      receiver:
         step === 'delivery'
-          ? schema
-              .min(5, 'O nome precisa ter pelo menos 5 caracteres')
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      description: Yup.string().when((values, schema) =>
+          ? Yup.string().min(5).required('O campo é obrigatório')
+          : Yup.string(),
+      description:
         step === 'delivery'
-          ? schema
-              .min(5, 'O nome precisa ter pelo menos 5 caracteres')
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      city: Yup.string().when((values, schema) =>
-        step === 'delivery' ? schema.required('O campo é obrigatório') : schema
-      ),
-      zipCode: Yup.string().when((values, schema) =>
+          ? Yup.string().min(5).required('O campo é obrigatório')
+          : Yup.string(),
+      city:
         step === 'delivery'
-          ? schema
-              .min(9, 'O campo precisa ter pelo menos 10 caracteres')
-              .max(9, 'O campo precisa ter 10 caracteres')
-              .required('O campo é obrigatório')
-          : schema
-      ),
-      numberAdress: Yup.string().when((values, schema) =>
-        step === 'delivery' ? schema.required('O campo é obrigatório') : schema
-      ),
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
+      zipCode:
+        step === 'delivery'
+          ? Yup.string().min(9).max(9).required('O campo é obrigatório')
+          : Yup.string(),
+      numberAdress:
+        step === 'delivery'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
       complement: Yup.string(),
-
-      cardName: Yup.string().when((values, schema) =>
-        step === 'payment' ? schema.required('O campo é obrigatório') : schema
-      ),
-      cardNumber: Yup.string().when((values, schema) =>
-        step === 'payment' ? schema.required('O campo é obrigatório') : schema
-      ),
-      cardCode: Yup.string().when((values, schema) =>
-        step === 'payment' ? schema.required('O campo é obrigatório') : schema
-      ),
-      expiresMonth: Yup.string().when((values, schema) =>
-        step === 'payment' ? schema.required('O campo é obrigatório') : schema
-      ),
-      expiresYear: Yup.string().when((values, schema) =>
-        step === 'payment' ? schema.required('O campo é obrigatório') : schema
-      )
+      cardName:
+        step === 'payment'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
+      cardNumber:
+        step === 'payment'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
+      cardCode:
+        step === 'payment'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
+      expiresMonth:
+        step === 'payment'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string(),
+      expiresYear:
+        step === 'payment'
+          ? Yup.string().required('O campo é obrigatório')
+          : Yup.string()
     }),
     onSubmit: (values) => {
-      const deliveryData = {
-        receiver: values.receiver,
-        adress: {
-          city: values.city,
-          complement: values.complement,
-          zipCode: values.zipCode,
-          number: Number(values.numberAdress),
-          description: values.description
-        }
-      }
-
-      const paymentData = {
-        card: {
-          name: values.cardName,
-          number: values.cardNumber,
-          code: Number(values.cardCode),
-          expires: {
-            month: Number(values.expiresMonth),
-            year: Number(values.expiresYear)
+      if (step === 'delivery') {
+        setDeliveryData({
+          receiver: values.receiver,
+          address: {
+            description: values.description,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.numberAdress),
+            complement: values.complement
           }
+        })
+        onContinue()
+      } else if (step === 'payment') {
+        const combinedData: PurchasePayload = {
+          delivery: deliveryData,
+          payment: {
+            card: {
+              name: values.cardName,
+              number: values.cardNumber,
+              code: Number(values.cardCode),
+              expires: {
+                month: Number(values.expiresMonth),
+                year: Number(values.expiresYear)
+              }
+            }
+          },
+          products: [
+            {
+              id: 1,
+              price: 190
+            }
+          ]
         }
+        purchase(combinedData)
       }
-
-      purchase({
-        delivery: deliveryData,
-        payment: paymentData,
-        products: [
-          {
-            id: 1,
-            price: 190
-          }
-        ]
-      })
     }
   })
 
@@ -121,10 +132,6 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
 
     if (isTouched && isInvalid) return message
     return ''
-  }
-
-  const handleFormSubmit = () => {
-    form.handleSubmit() // Dispara a submissão do formulário
   }
 
   return (
@@ -220,8 +227,7 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
               <div className="margin-top">
                 <Button
                   title="Clique aqui para ir ao formulário de pagamento"
-                  type="button"
-                  onClick={onContinue}
+                  type="submit"
                 >
                   Continuar com pagamento
                 </Button>
@@ -319,7 +325,7 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                 <Button
                   title="Clique aqui para finalizar a compra"
                   type="submit"
-                  onClick={handleFormSubmit}
+                  onClick={form.handleSubmit}
                 >
                   Finalizar o pagamento
                 </Button>

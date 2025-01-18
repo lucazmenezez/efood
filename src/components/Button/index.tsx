@@ -12,7 +12,7 @@ type Props = {
 const Button = ({ type, title, children, to, onClick }: Props) => {
   if (type === 'button' || type === 'submit') {
     return (
-      <StyleButton type="button" title={title} onClick={onClick}>
+      <StyleButton type={type} title={title} onClick={onClick}>
         {children}
       </StyleButton>
     )

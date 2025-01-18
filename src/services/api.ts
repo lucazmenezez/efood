@@ -6,11 +6,11 @@ type Product = {
   price: number
 }
 
-type PurchasePayload = {
+export type PurchasePayload = {
   products: Product[]
   delivery: {
     receiver: string
-    adress: {
+    address: {
       description: string
       city: string
       zipCode: string
