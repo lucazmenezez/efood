@@ -5,6 +5,7 @@ import Button from '../Button'
 import close from '../../assets/images/close.svg'
 
 import { add, open } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
 
 import { Menu } from '../../pages/Home'
 
@@ -19,13 +20,6 @@ type ModalProps = {
   price: number
   image: string
   food: Menu
-}
-
-export const formataPreco = (preco: number) => {
-  return new Intl.NumberFormat('pt-br', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
 }
 
 const Modal = ({
@@ -67,7 +61,7 @@ const Modal = ({
             title="Adicionar o prato ao carrinho"
             onClick={addToCart}
           >
-            Adicionar ao Carrinho - {formataPreco(price)}
+            Adicionar ao Carrinho - {parseToBrl(price)}
           </Button>
         </S.Text>
       </S.Content>

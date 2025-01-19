@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
-import lixeira from '../../assets/images/icon_lixeira.svg'
+import trashcan from '../../assets/images/icon_lixeira.svg'
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -25,7 +25,7 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${cores.preto};
+  background-color: ${colors.black};
   opacity: 0.8;
 `
 
@@ -33,8 +33,8 @@ export const Sidebar = styled.aside`
   z-index: 1;
   max-width: 360px;
   width: 100%;
-  background-color: ${cores.rosa};
-  color: ${cores.rosaClaro};
+  background-color: ${colors.pink};
+  color: ${colors.lightPink};
   padding: 32px 8px 0;
 
   ${StyleButton} {
@@ -59,8 +59,8 @@ export const PricesContainer = styled.div`
 
 export const CartItem = styled.li`
   display: flex;
-  background-color: ${cores.rosaClaro};
-  color: ${cores.rosa};
+  background-color: ${colors.lightPink};
+  color: ${colors.pink};
   padding: 8px 8px 12px;
   position: relative;
   margin-bottom: 16px;
@@ -82,7 +82,7 @@ export const CartItem = styled.li`
     position: absolute;
     bottom: 8px;
     right: 8px;
-    background-image: url(${lixeira});
+    background-image: url(${trashcan});
     width: 16px;
     height: 16px;
     border: none;

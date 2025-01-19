@@ -3,7 +3,7 @@ import Product from '../Product'
 import { List, ListContainer } from './styles'
 
 export type Props = {
-  page: 'home' | 'perfil'
+  page: 'home' | 'profile'
   food: Restaurants[] | Menu[]
 }
 

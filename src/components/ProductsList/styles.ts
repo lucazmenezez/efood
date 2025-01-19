@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Props } from '.'
 import { Card, Image, Reviews, Title } from '../Product/styles'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { TagStyle } from '../Tag/styles'
 
 export const ListContainer = styled.div`
@@ -18,9 +18,9 @@ export const List = styled.ul<Omit<Props, 'food'>>`
 
   ${Card} {
     background-color: ${(props) =>
-      props.page === 'home' ? `${cores.branco}` : `${cores.rosa}`};
+      props.page === 'home' ? `${colors.white}` : `${colors.pink}`};
     color: ${(props) =>
-      props.page === 'home' ? `${cores.rosa}` : `${cores.rosaClaro}`};
+      props.page === 'home' ? `${colors.pink}` : `${colors.lightPink}`};
     padding: ${(props) => (props.page === 'home' ? '0' : '8px')};
   }
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Props } from '.'
 import { Link } from 'react-router-dom'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderContainer = styled.div`
   padding: 40px 0;
@@ -33,17 +33,17 @@ export const Title = styled.h1`
 export const HeaderLink = styled(Link)`
   font-size: 18px;
   font-weight: 900;
-  color: ${cores.rosa};
+  color: ${colors.pink};
   text-decoration: none;
 `
 
 export const HeaderCart = styled.button`
   font-size: 18px;
   font-weight: 900;
-  color: ${cores.rosa};
+  color: ${colors.pink};
   text-decoration: none;
   border: none;
-  background-color: ${cores.rosaClaro};
+  background-color: ${colors.lightPink};
   cursor: pointer;
   display: flex;
   align-items: center;

@@ -16,7 +16,7 @@ export type Props = {
   title: string
   reviews?: number
   description: string
-  page: 'home' | 'perfil'
+  page: 'home' | 'profile'
   id: number
   price: number
   portion: string
@@ -73,7 +73,7 @@ const Product = ({
             </S.Reviews>
           </S.Div>
           <S.Description>
-            {page === 'perfil' ? getDescription(description) : description}
+            {page === 'profile' ? getDescription(description) : description}
           </S.Description>
           {page === 'home' ? (
             <Button

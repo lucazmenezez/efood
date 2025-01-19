@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
 export const ModalContainer = styled.div`
@@ -28,9 +28,9 @@ export const ModalContainer = styled.div`
 `
 
 export const Content = styled.div`
-  background-color: ${cores.rosa};
+  background-color: ${colors.pink};
   padding: 32px;
-  color: ${cores.branco};
+  color: ${colors.white};
   display: flex;
   align-items: center;
   position: relative;

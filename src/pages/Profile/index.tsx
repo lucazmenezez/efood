@@ -6,7 +6,7 @@ import Banner from '../../components/Banner'
 
 import { useGetCardapioQuery } from '../../services/api'
 
-const Perfil = () => {
+const Profile = () => {
   const { id } = useParams<{ id: string }>()
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -22,7 +22,7 @@ const Perfil = () => {
 
   return (
     <>
-      <Header page="perfil" />
+      <Header page="profile" />
       <Banner
         imageBanner={restaurante.capa}
         category={
@@ -32,9 +32,9 @@ const Perfil = () => {
         }
         restaurant={restaurante.titulo}
       />
-      <ProductsList food={restaurante.cardapio} page="perfil" />
+      <ProductsList food={restaurante.cardapio} page="profile" />
     </>
   )
 }
 
-export default Perfil
+export default Profile

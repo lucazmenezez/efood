@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 
 export const ContainerCard = styled.div`
   padding: 32px 8px 0;
-  background-color: ${cores.rosa};
-  color: ${cores.rosaClaro};
+  background-color: ${colors.pink};
+  color: ${colors.lightPink};
 
   h2 {
     padding-bottom: 16px;

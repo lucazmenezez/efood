@@ -11,7 +11,7 @@ import * as S from './styles'
 import { Link } from 'react-router-dom'
 
 export type Props = {
-  page: 'home' | 'perfil'
+  page: 'home' | 'profile'
 }
 
 const Header = ({ page }: Props) => {

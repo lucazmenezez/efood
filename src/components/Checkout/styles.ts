@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { colors } from '../../styles'
 import { StyleButton } from '../Button/styles'
 
 type InputGroupProps = {
@@ -39,8 +39,8 @@ export const InputGroup = styled.div<InputGroupProps>`
   }
 
   input {
-    background-color: ${cores.rosaClaro};
-    border: 1px solid ${cores.rosaClaro};
+    background-color: ${colors.lightPink};
+    border: 1px solid ${colors.lightPink};
     height: 32px;
     padding: 0 8px;
     width: 100%;

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Bannerstyle = styled.div`
   width: 100%;
@@ -34,12 +34,12 @@ export const BannerContainer = styled.div`
 export const Category = styled.h2`
   font-size: 32px;
   font-weight: 100;
-  color: ${cores.branco};
+  color: ${colors.white};
   margin-bottom: 156px;
 `
 
 export const Restaurant = styled.h3`
   font-size: 32px;
   font-weight: 900;
-  color: ${cores.branco};
+  color: ${colors.white};
 `

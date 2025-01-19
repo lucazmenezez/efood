@@ -5,8 +5,7 @@ import Button from '../Button'
 import Checkout from '../Checkout'
 
 import { close, remove } from '../../store/reducers/cart'
-import { formataPreco } from '../Modal/index'
-
+import { parseToBrl } from '../../utils/index'
 import { RootReducer } from '../../store'
 
 import * as S from './styles'
@@ -60,7 +59,7 @@ const Cart = () => {
                   <img src={item.foto} alt={item.nome} />
                   <div>
                     <h3>{item.nome}</h3>
-                    <span>{formataPreco(item.preco)}</span>
+                    <span>{parseToBrl(item.preco)}</span>
                   </div>
                   <button
                     type="button"
@@ -71,7 +70,7 @@ const Cart = () => {
             </ul>
             <S.PricesContainer>
               <p>Valor Total</p>
-              <span>{formataPreco(getFullPrice())}</span>
+              <span>{parseToBrl(getFullPrice())}</span>
             </S.PricesContainer>
             <Button
               type="button"
