@@ -1,19 +1,23 @@
+import { useDispatch } from 'react-redux'
+
 import Button from '../Button'
-import { Description, Title } from '../Product/styles'
-import { Content, IconClose, ModalContainer, Text } from './styles'
+
 import close from '../../assets/images/close.svg'
 
 import { add, open } from '../../store/reducers/cart'
-import { useDispatch } from 'react-redux'
+
 import { Menu } from '../../pages/Home'
 
+import { Description, Title } from '../Product/styles'
+import * as S from './styles'
+
 type ModalProps = {
-  fecharModal: () => void
-  nome: string
-  descricao: string
-  porcao: string
-  preco: number
-  imagem: string
+  closeModal: () => void
+  name: string
+  description: string
+  portion: string
+  price: number
+  image: string
   food: Menu
 }
 
@@ -25,12 +29,12 @@ export const formataPreco = (preco: number) => {
 }
 
 const Modal = ({
-  fecharModal,
-  descricao,
-  imagem,
-  nome,
-  porcao,
-  preco,
+  closeModal,
+  image,
+  name,
+  description,
+  portion,
+  price,
   food
 }: ModalProps) => {
   const dispatch = useDispatch()
@@ -41,25 +45,34 @@ const Modal = ({
   }
 
   return (
-    <ModalContainer className="visible">
-      <Content className="container">
-        <IconClose src={close} alt="Fechar modal" onClick={fecharModal} />
-        <img src={imagem} alt={nome} />
-        <Text>
-          <Title>{nome}</Title>
+    <S.ModalContainer className="visible">
+      <S.Content className="container">
+        <S.IconClose
+          src={close}
+          alt="Fechar modal"
+          title="Clique aqui para fechar o modal"
+          onClick={closeModal}
+        />
+        <img src={image} alt={name} />
+        <S.Text>
+          <Title>{name}</Title>
           <Description>
-            {descricao}
+            {description}
             <br />
             <br />
-            <span>Serve: {porcao}</span>
+            <span>Serve: {portion}</span>
           </Description>
-          <Button type="button" title="Ir para o carrinho" onClick={addToCart}>
-            Adicionar ao Carrinho - {formataPreco(preco)}
+          <Button
+            type="button"
+            title="Adicionar o prato ao carrinho"
+            onClick={addToCart}
+          >
+            Adicionar ao Carrinho - {formataPreco(price)}
           </Button>
-        </Text>
-      </Content>
-      <div className="overlay" onClick={fecharModal}></div>
-    </ModalContainer>
+        </S.Text>
+      </S.Content>
+      <div className="overlay" onClick={closeModal}></div>
+    </S.ModalContainer>
   )
 }
 

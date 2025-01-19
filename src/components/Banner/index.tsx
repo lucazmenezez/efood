@@ -1,4 +1,4 @@
-import { BannerContainer, Bannerstyle, Category, Restaurant } from './styles'
+import * as S from './styles'
 
 export type Props = {
   imageBanner: string
@@ -7,14 +7,14 @@ export type Props = {
 }
 
 const Banner = ({ imageBanner, category, restaurant }: Props) => (
-  <Bannerstyle style={{ backgroundImage: `url(${imageBanner})` }}>
+  <S.Bannerstyle style={{ backgroundImage: `url(${imageBanner})` }}>
     <div className="container">
-      <BannerContainer>
-        <Category>{category}</Category>
-        <Restaurant>{restaurant}</Restaurant>
-      </BannerContainer>
+      <S.BannerContainer>
+        <S.Category>{category}</S.Category>
+        <S.Restaurant>{restaurant}</S.Restaurant>
+      </S.BannerContainer>
     </div>
-  </Bannerstyle>
+  </S.Bannerstyle>
 )
 
 export default Banner

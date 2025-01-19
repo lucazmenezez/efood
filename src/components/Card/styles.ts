@@ -12,7 +12,9 @@ export const ContainerCard = styled.div`
     font-weight: bold;
   }
 
-  .margin-bottom {
+  .text-order {
     margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 22px;
   }
 `

@@ -1,49 +1,59 @@
+import { Link } from 'react-router-dom'
+
 import logo from '../../assets/images/logo.png'
 import iconFacebook from '../../assets/images/icon_facebook.svg'
 import iconInstagram from '../../assets/images/icon_instagram.svg'
 import iconTwitter from '../../assets/images/icon_twitter.svg'
-import {
-  Copyright,
-  FooterContainer,
-  FooterStyle,
-  List,
-  ListItem
-} from './styles'
+
+import * as S from './styles'
 
 const Footer = () => (
-  <FooterStyle>
+  <S.FooterStyle>
     <div className="container">
-      <FooterContainer>
-        <img src={logo} alt="Logo Efood" />
-        <List>
-          <ListItem>
+      <S.FooterContainer>
+        <Link to="/">
+          <img src={logo} alt="Logo Efood" />
+        </Link>
+        <S.List>
+          <S.ListItem>
             <a
               href="https://www.instagram.com"
               target="_blank"
               rel="noreferrer"
+              title="Clique aqui para acessar o Instagram"
             >
               <img src={iconInstagram} alt="Ícone do Instagram" />
             </a>
-          </ListItem>
-          <ListItem>
-            <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
+          </S.ListItem>
+          <S.ListItem>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              title="Clique aqui para acessar o Facebook"
+            >
               <img src={iconFacebook} alt="Ícone do Facebook" />
             </a>
-          </ListItem>
-          <ListItem>
-            <a href="https://www.twitter.com" target="_blank" rel="noreferrer">
+          </S.ListItem>
+          <S.ListItem>
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noreferrer"
+              title="Clique aqui para acessar o Twitter"
+            >
               <img src={iconTwitter} alt="Ícone do Twitter" />
             </a>
-          </ListItem>
-        </List>
-        <Copyright>
+          </S.ListItem>
+        </S.List>
+        <S.Copyright>
           A efood é uma plataforma para divulgação de estabelecimentos, a
           responsabilidade pela entrega, qualidade dos produtos é toda do
           estabelecimento contratado.
-        </Copyright>
-      </FooterContainer>
+        </S.Copyright>
+      </S.FooterContainer>
     </div>
-  </FooterStyle>
+  </S.FooterStyle>
 )
 
 export default Footer

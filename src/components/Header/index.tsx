@@ -1,18 +1,14 @@
-import {
-  HeaderBar,
-  HeaderCart,
-  HeaderContainer,
-  HeaderLink,
-  Title
-} from './styles'
+import { useDispatch, useSelector } from 'react-redux'
 
 import hero from '../../assets/images/banner_hero.png'
 import logo from '../../assets/images/logo.png'
 import cart from '../../assets/images/cart.svg'
 
 import { open } from '../../store/reducers/cart'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
+
+import * as S from './styles'
+import { Link } from 'react-router-dom'
 
 export type Props = {
   page: 'home' | 'perfil'
@@ -28,31 +24,41 @@ const Header = ({ page }: Props) => {
 
   if (page === 'home') {
     return (
-      <HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
+      <S.HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
         <div className="container">
-          <HeaderBar page={page}>
+          <S.HeaderBar page={page}>
             <img src={logo} alt="Efood" />
-            <Title>
+            <S.Title>
               Viva experiências gastronômicas no conforto da sua casa
-            </Title>
-          </HeaderBar>
+            </S.Title>
+          </S.HeaderBar>
         </div>
-      </HeaderContainer>
+      </S.HeaderContainer>
     )
   }
   return (
-    <HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
+    <S.HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
       <div className="container">
-        <HeaderBar page={page}>
-          <HeaderLink to="/">Restaurantes</HeaderLink>
-          <img src={logo} alt="Efood" />
-          <HeaderCart onClick={openCart}>
+        <S.HeaderBar page={page}>
+          <S.HeaderLink
+            title="Clique aqui para voltar a página de Restaurantes"
+            to="/"
+          >
+            Restaurantes
+          </S.HeaderLink>
+          <Link to="/">
+            <img src={logo} alt="Efood" />
+          </Link>
+          <S.HeaderCart
+            onClick={openCart}
+            title="Clique aqui para abrir o carrinho de compras"
+          >
             {items.length} <span>produto(s) no carrinho</span>
             <img src={cart} alt="carrinho de compras" />
-          </HeaderCart>
-        </HeaderBar>
+          </S.HeaderCart>
+        </S.HeaderBar>
       </div>
-    </HeaderContainer>
+    </S.HeaderContainer>
   )
 }
 

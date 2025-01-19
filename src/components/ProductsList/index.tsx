@@ -27,8 +27,8 @@ const ProductsList = ({ page, food }: Props) => (
                   reviews={f.avaliacao}
                   description={f.descricao}
                   page={page}
-                  preco={0}
-                  porcao={''}
+                  price={0}
+                  portion={''}
                 />
               )
             })
@@ -41,8 +41,8 @@ const ProductsList = ({ page, food }: Props) => (
                 title={f.nome}
                 description={f.descricao}
                 page={page}
-                porcao={f.porcao}
-                preco={f.preco}
+                portion={f.porcao}
+                price={f.preco}
               />
             ))}
       </List>

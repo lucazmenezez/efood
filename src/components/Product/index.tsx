@@ -1,20 +1,14 @@
 import { useState } from 'react'
-import {
-  Card,
-  Content,
-  Description,
-  Div,
-  Image,
-  Reviews,
-  TagContainer,
-  Title
-} from './styles'
 
-import iconStar from '../../assets/images/icon_star.svg'
 import Tag from '../Tag'
 import Button from '../Button'
 import Modal from '../Modal'
+
+import iconStar from '../../assets/images/icon_star.svg'
+
 import { Menu } from '../../pages/Home'
+
+import * as S from './styles'
 
 export type Props = {
   image: string
@@ -24,8 +18,8 @@ export type Props = {
   description: string
   page: 'home' | 'perfil'
   id: number
-  preco: number
-  porcao: string
+  price: number
+  portion: string
 }
 
 const Product = ({
@@ -36,13 +30,13 @@ const Product = ({
   description,
   page,
   id,
-  preco,
-  porcao
+  portion,
+  price
 }: Props) => {
-  const [modalAberto, setModalAberto] = useState(false)
+  const [openModal, setOpenModal] = useState(false)
 
-  const abrirModal = () => setModalAberto(true)
-  const fecharModal = () => setModalAberto(false)
+  const openModalConst = () => setOpenModal(true)
+  const closeModalConst = () => setOpenModal(false)
 
   const getDescription = (descricao: string) => {
     if (descricao.length > 124) {
@@ -54,56 +48,60 @@ const Product = ({
 
   const food: Menu = {
     foto: image,
-    preco: preco,
+    preco: price,
     id: id,
     nome: title,
     descricao: description,
-    porcao: porcao
+    porcao: portion
   }
 
   return (
     <>
-      <Card>
-        <Image src={image} alt="Imagem dos Restaurantes" />
-        <TagContainer>
+      <S.Card>
+        <S.Image src={image} alt="Imagem dos Restaurantes" />
+        <S.TagContainer>
           {tags.map((etiqueta, index) => (
             <Tag key={`${etiqueta}-${index}`}>{etiqueta}</Tag>
           ))}
-        </TagContainer>
-        <Content>
-          <Div>
-            <Title>{title}</Title>
-            <Reviews>
+        </S.TagContainer>
+        <S.Content>
+          <S.Div>
+            <S.Title>{title}</S.Title>
+            <S.Reviews>
               {reviews}
               <img src={iconStar} alt="Ícone de estrela de avaliações" />
-            </Reviews>
-          </Div>
-          <Description>
+            </S.Reviews>
+          </S.Div>
+          <S.Description>
             {page === 'perfil' ? getDescription(description) : description}
-          </Description>
+          </S.Description>
           {page === 'home' ? (
-            <Button type="link" title="Ver nossos pratos" to={`/perfil/${id}`}>
+            <Button
+              type="link"
+              title="Ver todos os pratos desse restaurante"
+              to={`/perfil/${id}`}
+            >
               Saiba Mais
             </Button>
           ) : (
             <Button
               type="button"
-              title="Ir para o carrinho"
-              onClick={abrirModal}
+              title="Ver mais informações sobre o prato"
+              onClick={openModalConst}
             >
               Mais Detalhes
             </Button>
           )}
-        </Content>
-      </Card>
-      {modalAberto && (
+        </S.Content>
+      </S.Card>
+      {openModal && (
         <Modal
-          fecharModal={fecharModal}
-          nome={title}
-          descricao={description}
-          porcao={porcao}
-          preco={preco}
-          imagem={image}
+          closeModal={closeModalConst}
+          name={title}
+          description={description}
+          portion={portion}
+          price={price}
+          image={image}
           food={food}
         />
       )}

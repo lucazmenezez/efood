@@ -1,8 +1,8 @@
+import { useParams } from 'react-router-dom'
+
 import Header from '../../components/Header'
 import ProductsList from '../../components/ProductsList'
-
 import Banner from '../../components/Banner'
-import { useParams } from 'react-router-dom'
 
 import { useGetCardapioQuery } from '../../services/api'
 

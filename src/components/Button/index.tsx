@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
-import { StyleButton, StyleLink } from './styles'
+
+import * as S from './styles'
 
 type Props = {
   type: 'button' | 'link' | 'submit'
@@ -12,15 +13,15 @@ type Props = {
 const Button = ({ type, title, children, to, onClick }: Props) => {
   if (type === 'button' || type === 'submit') {
     return (
-      <StyleButton type={type} title={title} onClick={onClick}>
+      <S.StyleButton type={type} title={title} onClick={onClick}>
         {children}
-      </StyleButton>
+      </S.StyleButton>
     )
   }
   return (
-    <StyleLink to={to as string} title={title}>
+    <S.StyleLink to={to as string} title={title}>
       {children}
-    </StyleLink>
+    </S.StyleLink>
   )
 }
 
