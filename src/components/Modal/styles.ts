@@ -64,6 +64,8 @@ export const IconClose = styled.img`
   top: 8px;
   right: 8px;
   cursor: pointer;
+  height: 16px;
+  width: 16px;
 `
 
 export const Text = styled.div`

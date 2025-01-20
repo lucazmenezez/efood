@@ -24,17 +24,19 @@ export type Menu = {
 }
 
 const Home = () => {
-  const { data: restaurants } = useGetRestaurantsQuery()
+  const { data: restaurants, isLoading: isLoadingRestaurants } =
+    useGetRestaurantsQuery()
 
-  if (restaurants) {
-    return (
-      <>
-        <Header page="home" />
-        <ProductsList food={restaurants} page="home" />
-      </>
-    )
-  }
-  return <h4>Carregando...</h4>
+  return (
+    <>
+      <Header page="home" />
+      {isLoadingRestaurants ? (
+        <ProductsList food={[]} page="home" isLoading={true} />
+      ) : (
+        <ProductsList isLoading={false} food={restaurants || []} page="home" />
+      )}
+    </>
+  )
 }
 
 export default Home

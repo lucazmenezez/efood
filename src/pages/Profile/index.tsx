@@ -7,16 +7,22 @@ import Banner from '../../components/Banner'
 import { useGetCardapioQuery } from '../../services/api'
 
 const Profile = () => {
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams<{ id?: string }>()
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { data: restaurante } = useGetCardapioQuery(id!)
+  const { data: restaurante, isLoading: isLoadingMenu } = useGetCardapioQuery(
+    id as string
+  )
 
-  if (!restaurante) {
-    return <p>Carregando...</p>
+  if (isLoadingMenu) {
+    return (
+      <>
+        <Header page="profile" />
+        <ProductsList isLoading={true} food={[]} page="profile" />
+      </>
+    )
   }
 
-  if (!id) {
+  if (!restaurante) {
     return <p>Restaurante não encontrado.</p>
   }
 
@@ -32,7 +38,11 @@ const Profile = () => {
         }
         restaurant={restaurante.titulo}
       />
-      <ProductsList food={restaurante.cardapio} page="profile" />
+      <ProductsList
+        isLoading={false}
+        food={restaurante.cardapio || []}
+        page="profile"
+      />
     </>
   )
 }
