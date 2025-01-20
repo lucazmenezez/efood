@@ -126,12 +126,12 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
 
   return (
@@ -176,10 +176,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       value={form.values.receiver}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('receiver') ? 'error' : ''}
                     />
-                    <small>
-                      {getErrorMessage('receiver', form.errors.receiver)}
-                    </small>
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="description">Endereço</label>
@@ -190,10 +188,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       value={form.values.description}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('description') ? 'error' : ''
+                      }
                     />
-                    <small>
-                      {getErrorMessage('description', form.errors.description)}
-                    </small>
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="city">Cidade</label>
@@ -204,8 +202,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       value={form.values.city}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('city') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('city', form.errors.city)}</small>
                   </S.InputGroup>
                   <div className="inputGroupFlex">
                     <S.InputGroup>
@@ -217,10 +215,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.zipCode}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={checkInputHasError('zipCode') ? 'error' : ''}
                       />
-                      <small>
-                        {getErrorMessage('zipCode', form.errors.zipCode)}
-                      </small>
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="numberAdress">Número</label>
@@ -231,13 +227,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.numberAdress}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={
+                          checkInputHasError('numberAdress') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage(
-                          'numberAdress',
-                          form.errors.numberAdress
-                        )}
-                      </small>
                     </S.InputGroup>
                   </div>
                   <S.InputGroup>
@@ -249,10 +242,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       value={form.values.complement}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('complement') ? 'error' : ''
+                      }
                     />
-                    <small>
-                      {getErrorMessage('complement', form.errors.complement)}
-                    </small>
                   </S.InputGroup>
                   <div className="margin-top">
                     <Button
@@ -286,10 +279,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       value={form.values.cardName}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('cardName') ? 'error' : ''}
                     />
-                    <small>
-                      {getErrorMessage('cardName', form.errors.cardName)}
-                    </small>
                   </S.InputGroup>
                   <div className="inputGroupFlex">
                     <S.InputGroup maxWidth="228px">
@@ -301,10 +292,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.cardNumber}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={
+                          checkInputHasError('cardNumber') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                      </small>
                     </S.InputGroup>
                     <S.InputGroup maxWidth="87px">
                       <label htmlFor="cardCode">CVV</label>
@@ -315,10 +306,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.cardCode}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={
+                          checkInputHasError('cardCode') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage('cardCode', form.errors.cardCode)}
-                      </small>
                     </S.InputGroup>
                   </div>
                   <div className="inputGroupFlex">
@@ -331,13 +322,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.expiresMonth}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={
+                          checkInputHasError('expiresMonth') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage(
-                          'expiresMonth',
-                          form.errors.expiresMonth
-                        )}
-                      </small>
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="expiresYear">Ano de Vencimento</label>
@@ -348,13 +336,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         value={form.values.expiresYear}
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
+                        className={
+                          checkInputHasError('expiresYear') ? 'error' : ''
+                        }
                       />
-                      <small>
-                        {getErrorMessage(
-                          'expiresYear',
-                          form.errors.expiresYear
-                        )}
-                      </small>
                     </S.InputGroup>
                   </div>
                   <div className="margin-top">

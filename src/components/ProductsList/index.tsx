@@ -1,6 +1,8 @@
-import { Menu, Restaurants } from '../../pages/Home'
 import Product from '../Product'
-import { List, ListContainer } from './styles'
+
+import { Menu, Restaurants } from '../../pages/Home'
+
+import * as S from './styles'
 
 export type Props = {
   page: 'home' | 'profile'
@@ -8,9 +10,9 @@ export type Props = {
 }
 
 const ProductsList = ({ page, food }: Props) => (
-  <ListContainer>
+  <S.ListContainer>
     <div className="container">
-      <List page={page}>
+      <S.List page={page}>
         {page === 'home'
           ? (food as Restaurants[]).map((f) => {
               const tags = f.destacado
@@ -45,9 +47,9 @@ const ProductsList = ({ page, food }: Props) => (
                 price={f.preco}
               />
             ))}
-      </List>
+      </S.List>
     </div>
-  </ListContainer>
+  </S.ListContainer>
 )
 
 export default ProductsList

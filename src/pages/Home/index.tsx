@@ -1,7 +1,7 @@
-import { useGetRestaurantsQuery } from '../../services/api'
-
 import Header from '../../components/Header'
 import ProductsList from '../../components/ProductsList'
+
+import { useGetRestaurantsQuery } from '../../services/api'
 
 export type Restaurants = {
   id: number

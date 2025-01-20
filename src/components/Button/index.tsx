@@ -8,12 +8,18 @@ type Props = {
   to?: string
   onClick?: () => void
   children: ReactNode
+  disabled?: boolean
 }
 
-const Button = ({ type, title, children, to, onClick }: Props) => {
+const Button = ({ type, title, children, to, onClick, disabled }: Props) => {
   if (type === 'button' || type === 'submit') {
     return (
-      <S.StyleButton type={type} title={title} onClick={onClick}>
+      <S.StyleButton
+        type={type}
+        title={title}
+        onClick={onClick}
+        disabled={disabled}
+      >
         {children}
       </S.StyleButton>
     )
