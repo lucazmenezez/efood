@@ -1,10 +1,14 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
   background-color: ${colors.white};
   max-width: 472px;
   position: relative;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin: 0 auto;
+  }
 `
 
 export const TagContainer = styled.div`
