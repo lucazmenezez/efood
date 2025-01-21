@@ -27,7 +27,9 @@ const Header = ({ page }: Props) => {
       <S.HeaderContainer style={{ backgroundImage: `url(${hero})` }}>
         <div className="container">
           <S.HeaderBar page={page}>
-            <img src={logo} alt="Efood" />
+            <h1 className="title">
+              <img src={logo} alt="Efood" />
+            </h1>
             <S.Title>
               Viva experiências gastronômicas no conforto da sua casa
             </S.Title>

@@ -1,11 +1,16 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import Button from '../Button'
 import Card from '../Card'
 
 import { PurchasePayload, usePurchaseMutation } from '../../services/api'
+import { RootReducer } from '../../store'
+import { getTotalPrice, parseToBrl } from '../../utils'
+import { clear, close } from '../../store/reducers/cart'
 
 import * as S from './styles'
 
@@ -16,7 +21,8 @@ type CheckoutProps = {
 }
 
 const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const [deliveryData, setDeliveryData] = useState<PurchasePayload['delivery']>(
     {
       receiver: '',
@@ -29,6 +35,14 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
       }
     }
   )
+
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+
+  //   }
+  // }, [isSuccess, dispatch])
 
   const form = useFormik({
     initialValues: {
@@ -114,12 +128,10 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
               }
             }
           },
-          products: [
-            {
-              id: 1,
-              price: 190
-            }
-          ]
+          products: items.map((item) => ({
+            id: item.id,
+            price: item.preco as number
+          }))
         }
         purchase(combinedData)
       }
@@ -134,9 +146,15 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
     return hasError
   }
 
+  const orderSuccess = () => {
+    dispatch(close())
+    dispatch(clear())
+    window.location.reload()
+  }
+
   return (
     <div className="container">
-      {isSuccess ? (
+      {isSuccess && data ? (
         <Card title={`Pedido realizado - ${data.orderId}`}>
           <>
             <p className="text-order">
@@ -156,7 +174,11 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
             </p>
-            <Button title="Clique aqui para concluir o pedido" type="button">
+            <Button
+              title="Clique aqui para concluir o pedido"
+              type="button"
+              onClick={orderSuccess}
+            >
               Concluir
             </Button>
           </>
@@ -177,6 +199,7 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('receiver') ? 'error' : ''}
+                      placeholder="João Silva"
                     />
                   </S.InputGroup>
                   <S.InputGroup>
@@ -208,7 +231,7 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                   <div className="inputGroupFlex">
                     <S.InputGroup>
                       <label htmlFor="zipCode">CEP</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="zipCode"
                         name="zipCode"
@@ -216,11 +239,13 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         onChange={form.handleChange}
                         onBlur={form.handleBlur}
                         className={checkInputHasError('zipCode') ? 'error' : ''}
+                        placeholder="12345-678"
+                        mask="99999-999"
                       />
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="numberAdress">Número</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="numberAdress"
                         name="numberAdress"
@@ -230,6 +255,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         className={
                           checkInputHasError('numberAdress') ? 'error' : ''
                         }
+                        placeholder="1234"
+                        mask="9999"
                       />
                     </S.InputGroup>
                   </div>
@@ -267,7 +294,9 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
             </Card>
           )}
           {step === 'payment' && (
-            <Card title="Pagamento - Valor a pagar R$ 190,90">
+            <Card
+              title={`Pagamento - Valor a pagar ${parseToBrl(getTotalPrice(items))}`}
+            >
               <>
                 <S.Column>
                   <S.InputGroup>
@@ -285,7 +314,7 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                   <div className="inputGroupFlex">
                     <S.InputGroup maxWidth="228px">
                       <label htmlFor="cardNumber">Número no cartão</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="cardNumber"
                         name="cardNumber"
@@ -295,11 +324,13 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         className={
                           checkInputHasError('cardNumber') ? 'error' : ''
                         }
+                        placeholder="0000 0000 0000 0000"
+                        mask="9999 9999 9999 9999"
                       />
                     </S.InputGroup>
                     <S.InputGroup maxWidth="87px">
                       <label htmlFor="cardCode">CVV</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="cardCode"
                         name="cardCode"
@@ -309,13 +340,15 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         className={
                           checkInputHasError('cardCode') ? 'error' : ''
                         }
+                        placeholder="000"
+                        mask="999"
                       />
                     </S.InputGroup>
                   </div>
                   <div className="inputGroupFlex">
                     <S.InputGroup>
                       <label htmlFor="expiresMonth">Mês de Vencimento</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="expiresMonth"
                         name="expiresMonth"
@@ -325,11 +358,13 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         className={
                           checkInputHasError('expiresMonth') ? 'error' : ''
                         }
+                        placeholder="00"
+                        mask="99"
                       />
                     </S.InputGroup>
                     <S.InputGroup>
                       <label htmlFor="expiresYear">Ano de Vencimento</label>
-                      <input
+                      <InputMask
                         type="text"
                         id="expiresYear"
                         name="expiresYear"
@@ -339,6 +374,8 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                         className={
                           checkInputHasError('expiresYear') ? 'error' : ''
                         }
+                        placeholder="0000"
+                        mask="9999"
                       />
                     </S.InputGroup>
                   </div>
@@ -347,8 +384,11 @@ const Checkout = ({ onContinue, onBack, step }: CheckoutProps) => {
                       title="Clique aqui para finalizar a compra"
                       type="submit"
                       onClick={form.handleSubmit}
+                      disabled={isLoading}
                     >
-                      Finalizar o pagamento
+                      {isLoading
+                        ? 'Finalizando compra...'
+                        : 'Finalizar pagamento'}
                     </Button>
                     <Button
                       title="Clique aqui para voltar a edição de endereço"

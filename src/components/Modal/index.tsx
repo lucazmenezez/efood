@@ -7,8 +7,6 @@ import close from '../../assets/images/close.svg'
 import { add, open } from '../../store/reducers/cart'
 import { parseToBrl } from '../../utils'
 
-import { Menu } from '../../pages/Home'
-
 import { Description, Title } from '../Product/styles'
 import * as S from './styles'
 

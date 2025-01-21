@@ -6,8 +6,6 @@ import Modal from '../Modal'
 
 import iconStar from '../../assets/images/icon_star.svg'
 
-import { Menu } from '../../pages/Home'
-
 import * as S from './styles'
 
 export type Props = {

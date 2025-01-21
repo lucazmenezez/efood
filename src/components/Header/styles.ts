@@ -15,6 +15,10 @@ export const HeaderBar = styled.header<Props>`
     props.page === 'home' ? 'center' : 'space-between'};
   align-items: center;
 
+  .title {
+    line-height: 0;
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
     span {
       display: none;

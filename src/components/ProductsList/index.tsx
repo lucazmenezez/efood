@@ -1,9 +1,7 @@
 import Product from '../Product'
-
-import { Menu, Restaurants } from '../../pages/Home'
+import Loader from '../Loader'
 
 import * as S from './styles'
-import Loader from '../Loader'
 
 export type Props = {
   page: 'home' | 'profile'
